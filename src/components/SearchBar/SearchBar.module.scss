@@ -1,0 +1,29 @@
+@import '../../styles/variables';
+
+.searchBar {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px 0 40px 0;
+
+  h1 {
+    text-align: center;
+  }
+}
+
+.searchFormContainer {
+  position: relative;
+  width: 500px;
+  max-width: 100%;
+}
+
+.searchForm {
+  display: flex;
+  height: 40px;
+  border: 2px solid $color-secondary;
+
+  .submitButton {
+    background: $color-primary-light;
+  }
+}

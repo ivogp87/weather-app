@@ -1,8 +1,10 @@
 import React from 'react';
+import styles from './App.module.scss';
+import SearchBar from '../SearchBar';
 
 const App = () => (
-  <div>
-    <h1>Hello world</h1>
+  <div className={styles.container}>
+    <SearchBar />
   </div>
 );
 

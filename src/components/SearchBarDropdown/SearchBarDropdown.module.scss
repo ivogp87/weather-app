@@ -1,0 +1,34 @@
+@import '../../styles/variables';
+
+.searchBarDropdown {
+  position: absolute;
+  top: 40px;
+  width: 100%;
+  list-style: none;
+  background: $color-primary-light;
+  border: 2px solid $color-secondary;
+  border-top: 0;
+
+  li {
+    padding: 10px;
+    border-bottom: 2px solid $color-quaternary;
+    cursor: pointer;
+
+    &:last-child {
+      border-bottom: 0;
+    }
+
+    &:hover {
+      background-color: $color-primary;
+
+      .icon {
+        color: $color-tertiary;
+      }
+    }
+  }
+}
+
+.icon {
+  color: $color-quaternary;
+  margin-right: 10px;
+}
