@@ -1,0 +1,8 @@
+@import '../../styles/variables';
+
+.card {
+  margin-bottom: 20px;
+  padding: 5px 10px 15px 10px;
+  background: $color-primary-light;
+  box-shadow: 0 0 10px $color-quaternary;
+}

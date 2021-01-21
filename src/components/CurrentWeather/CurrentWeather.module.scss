@@ -1,0 +1,45 @@
+.currentWeather {
+  position: relative;
+}
+
+.currentWeatherHeader {
+  display: flex;
+
+  .favoriteButton {
+    color: #f0b400;
+
+    &:hover {
+      color: #ffc517;
+    }
+  }
+}
+
+.currentWeatherInfo {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.weatherNow,
+.forecastSummary {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.loadingSpinner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  & > * {
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.8);
+    font-weight: 500;
+  }
+}
