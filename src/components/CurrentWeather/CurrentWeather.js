@@ -1,7 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { faStar } from '@fortawesome/free-solid-svg-icons';
-import { faStar as faStarOutline } from '@fortawesome/free-regular-svg-icons';
 import styles from './CurrentWeather.module.scss';
 import Card from '../Card';
 import IconButton from '../IconButton';
@@ -25,7 +23,7 @@ const CurrentWeather = ({
   onClick,
   isFavorite,
 }) => {
-  const iconName = isFavorite ? faStar : faStarOutline;
+  const iconName = isFavorite ? 'star' : ['far', 'star'];
 
   const renderLoadingSpinner = () => {
     if (!isLoading) return null;

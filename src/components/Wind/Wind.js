@@ -1,14 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowDown } from '@fortawesome/free-solid-svg-icons';
 import styles from './Wind.module.scss';
 
 const Wind = ({ speed, degrees }) => (
   <p>
     <FontAwesomeIcon
       className={styles.windDirection}
-      icon={faArrowDown}
+      icon="arrow-down"
       transform={{ rotate: degrees }}
     />
     {speed.toFixed(1)}

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import styles from './SearchBar.module.scss';
 import { selectLocation, fetchLocationsList } from '../../actions';
 import TextInput from '../TextInput';
@@ -76,12 +75,7 @@ const SearchBar = () => {
             onChange={handleChange}
             onBlur={handleBlur}
           />
-          <IconButton
-            type="submit"
-            icon={faSearch}
-            color="primary"
-            className={styles.submitButton}
-          />
+          <IconButton type="submit" icon="search" color="primary" className={styles.submitButton} />
         </form>
         {showDropdown && (
           <SearchBarDropdown locationsList={locationsList} onClick={handleSelectLocation} />
