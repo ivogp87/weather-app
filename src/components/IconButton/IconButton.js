@@ -22,7 +22,7 @@ const IconButton = ({ type, icon, color, size, className, onClick }) => {
 
 IconButton.propTypes = {
   type: PropTypes.oneOf(['button', 'submit']).isRequired,
-  icon: PropTypes.shape({}).isRequired,
+  icon: PropTypes.oneOfType([PropTypes.string, PropTypes.array]).isRequired,
   color: PropTypes.oneOf(['primary', 'secondary']),
   size: PropTypes.oneOf(['small', 'medium', 'large']),
   className: PropTypes.string,
