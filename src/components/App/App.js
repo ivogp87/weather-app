@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './App.module.scss';
+import '../../iconLibrary';
 import SearchBar from '../SearchBar';
 import WeatherData from '../WeatherData';
 
