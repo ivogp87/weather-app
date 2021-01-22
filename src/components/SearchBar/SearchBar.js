@@ -87,9 +87,11 @@ const SearchBar = () => {
           <SearchBarDropdown locationsList={locationsList} onClick={handleSelectLocation} />
         )}
       </div>
-      {touched && formError && <Status type="error">{formError}</Status>}
-      {locationsStatus === 'error' && <Status type="error">{locationsError}</Status>}
-      {locationsStatus === 'loading' && <Status type="loading">Loading...</Status>}
+      <div className={styles.statusMessages}>
+        {touched && formError && <Status type="error">{formError}</Status>}
+        {locationsStatus === 'error' && <Status type="error">{locationsError}</Status>}
+        {locationsStatus === 'loading' && <Status type="loading">Loading...</Status>}
+      </div>
     </header>
   );
 };
