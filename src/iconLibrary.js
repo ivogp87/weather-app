@@ -10,7 +10,8 @@ import {
   faArrowRight,
   faChevronUp,
   faChevronDown,
-  faMapMarkedAlt,
+  faMapMarkerAlt,
+  faBars,
 } from '@fortawesome/free-solid-svg-icons';
 import { faStar as farStar } from '@fortawesome/free-regular-svg-icons';
 
@@ -26,5 +27,6 @@ export default library.add(
   faArrowRight,
   faChevronUp,
   faChevronDown,
-  faMapMarkedAlt
+  faMapMarkerAlt,
+  faBars
 );
