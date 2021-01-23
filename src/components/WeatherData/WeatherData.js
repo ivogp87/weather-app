@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchWeatherForecast, saveLocation, removeLocation } from '../../actions';
-import longLocationName from '../../utils/longLocationName';
 import Status from '../Status';
 import CurrentWeather from '../CurrentWeather';
 
@@ -11,7 +10,7 @@ const WeatherData = () => {
   const weatherForecast = useSelector((state) => state.weatherForecast);
   const dispatch = useDispatch();
 
-  const { locationName, country, state: region, latitude, longitude } = selectedLocation;
+  const { fullLocationName, latitude, longitude } = selectedLocation;
 
   useEffect(() => {
     if (latitude && longitude) {
@@ -26,14 +25,8 @@ const WeatherData = () => {
   const isError = forecastStatus === 'error';
 
   const isFavoriteLocation = favoriteLocations.some(
-    // locationName, country and region(state) are destructured from selectedLocation
-    (location) =>
-      location.locationName === locationName &&
-      location.country === country &&
-      location.state === region
+    (location) => location.fullLocationName === fullLocationName // fullLocationName is destructured from selectedLocation
   );
-
-  const fullLocationName = longLocationName(locationName, country, region);
 
   const handleSaveRemoveLocation = () => {
     if (isFavoriteLocation) {
