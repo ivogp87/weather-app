@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchWeatherForecast, saveLocation, removeLocation } from '../../actions';
+import longLocationName from '../../utils/longLocationName';
 import Status from '../Status';
 import CurrentWeather from '../CurrentWeather';
 
@@ -32,10 +33,7 @@ const WeatherData = () => {
       location.state === region
   );
 
-  // region (state) is not available for every country
-  const fullLocationName = region
-    ? `${locationName}, ${country} (${region})`
-    : `${locationName}, ${country}`;
+  const fullLocationName = longLocationName(locationName, country, region);
 
   const handleSaveRemoveLocation = () => {
     if (isFavoriteLocation) {
