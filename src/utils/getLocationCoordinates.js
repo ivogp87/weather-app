@@ -1,23 +1,31 @@
 import openWeatherMap from '../apis/openWeatherMap';
 
-const formatResponse = (response) =>
-  response.map(({ name, country, lat: latitude, lon: longitude, state = '' }) => ({
-    locationName: name,
-    country,
-    state,
-    latitude,
-    longitude,
-  }));
+const formatResponse = (locationsArray) =>
+  locationsArray.map((location) => {
+    const { name: locationName, country, lat: latitude, lon: longitude, state = '' } = location;
+    const fullLocationName = state
+      ? `${locationName}, ${country} (${state})`
+      : `${locationName}, ${country}`;
 
-// Remove duplicate locations - sometimes the API return the same location few times with slightly different geolocation coordinates
-const filterLocations = (locationsList) => {
+    return {
+      locationName,
+      country,
+      state,
+      fullLocationName,
+      latitude,
+      longitude,
+    };
+  });
+
+// Sometimes the API return the same location few times with slightly different geolocation coordinates
+const removeDuplicateLocations = (locationsList) => {
   if (locationsList.length === 1) return locationsList;
 
   return locationsList.reduce((uniqueLocations, location) => {
     const isDuplicate = uniqueLocations.some(
-      ({ locationName: name, country, state }) =>
-        name === location.locationName && country === location.country && state === location.state
+      ({ fullLocationName: fullName }) => fullName === location.fullLocationName
     );
+
     return isDuplicate ? uniqueLocations : [...uniqueLocations, location];
   }, []);
 };
@@ -33,7 +41,7 @@ const getLocationCoordinates = async (locationName) => {
     }
 
     const formattedResponse = formatResponse(response.data);
-    const uniqueLocations = filterLocations(formattedResponse);
+    const uniqueLocations = removeDuplicateLocations(formattedResponse);
 
     return uniqueLocations;
   } catch (error) {
