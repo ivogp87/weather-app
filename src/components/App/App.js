@@ -4,6 +4,7 @@ import styles from './App.module.scss';
 import '../../iconLibrary';
 import { getCurrentLocation, selectLocation } from '../../actions';
 import SearchBar from '../SearchBar';
+import FavoriteLocations from '../FavoriteLocations';
 import WeatherData from '../WeatherData';
 
 const App = () => {
@@ -25,6 +26,7 @@ const App = () => {
   return (
     <div className={styles.container}>
       <SearchBar />
+      <FavoriteLocations />
       <WeatherData />
     </div>
   );
