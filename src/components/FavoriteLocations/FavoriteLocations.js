@@ -1,11 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectLocation } from '../../actions';
 import styles from './FavoriteLocations.module.scss';
 import Card from '../Card';
 import IconButton from '../IconButton';
 import Button from '../Button';
 
-const LocationsMenu = ({ locations, currentLocationName, selectedLocationName, onClick }) => {
+const FavoriteLocations = () => {
+  const dispatch = useDispatch();
+  const favoriteLocations = useSelector((state) => state.favoriteLocations);
+  const currentLocationName = useSelector((state) => state.currentLocation.data.fullLocationName);
+  const selectedLocationName = useSelector((state) => state.selectedLocation.fullLocationName);
+
+  const handleSelectLocation = (locationObject) => {
+    dispatch(selectLocation(locationObject));
+  };
+
   const [isOpen, setIsOpen] = useState(false);
 
   // Close the mobile menu on click outside the menu and when menu item is clicked
@@ -26,7 +36,7 @@ const LocationsMenu = ({ locations, currentLocationName, selectedLocationName, o
     : styles.locationsMenu;
   const buttonClass = isOpen ? styles.mobileButton : '';
 
-  if (locations.length === 0) return null;
+  if (favoriteLocations.length === 0) return null;
 
   return (
     <Card>
@@ -40,7 +50,7 @@ const LocationsMenu = ({ locations, currentLocationName, selectedLocationName, o
         />
       </header>
       <ul className={menuClass}>
-        {locations.map((location) => {
+        {favoriteLocations.map((location) => {
           const { fullLocationName } = location;
           const buttonColor = fullLocationName === selectedLocationName ? 'primary' : 'secondary';
           const buttonIcon = fullLocationName === currentLocationName ? 'map-marker-alt' : '';
@@ -48,7 +58,7 @@ const LocationsMenu = ({ locations, currentLocationName, selectedLocationName, o
           return (
             <li key={fullLocationName}>
               <Button
-                onClick={() => onClick(location)}
+                onClick={() => handleSelectLocation(location)}
                 icon={buttonIcon}
                 color={buttonColor}
                 className={buttonClass}
@@ -63,17 +73,4 @@ const LocationsMenu = ({ locations, currentLocationName, selectedLocationName, o
   );
 };
 
-LocationsMenu.propTypes = {
-  locations: PropTypes.arrayOf(PropTypes.object),
-  currentLocationName: PropTypes.string,
-  selectedLocationName: PropTypes.string,
-  onClick: PropTypes.func.isRequired,
-};
-
-LocationsMenu.defaultProps = {
-  locations: [],
-  currentLocationName: '',
-  selectedLocationName: '',
-};
-
-export default LocationsMenu;
+export default FavoriteLocations;
