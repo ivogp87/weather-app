@@ -1,0 +1,61 @@
+@import '../../styles/variables';
+
+.locationsHeader {
+  display: flex;
+  align-items: center;
+
+  h2 {
+    flex-grow: 1;
+  }
+}
+
+.menuIcon {
+  display: none;
+}
+
+.locationsMenu {
+  display: flex;
+  flex-flow: row wrap;
+  list-style: none;
+
+  li {
+    margin-right: 10px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  .mobileButton {
+    color: $text-primary;
+    background: none;
+    border: none;
+
+    &:hover {
+      color: $text-primary-light;
+      background: $color-primary;
+    }
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .locationsMenu {
+    display: none;
+
+    &.locationsMenuActive {
+      display: flex;
+    }
+
+    li {
+      flex-basis: 100%;
+    }
+  }
+
+  .mobileButton {
+    width: 100%;
+  }
+
+  .menuIcon {
+    display: block;
+  }
+}
