@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styles from './App.module.scss';
 import '../../iconLibrary';
-import { getCurrentLocation, selectLocation } from '../../actions';
+import { getCurrentLocation, selectLocation, restoreSavedLocations } from '../../actions';
 import SearchBar from '../SearchBar';
 import FavoriteLocations from '../FavoriteLocations';
 import WeatherData from '../WeatherData';
@@ -10,18 +10,28 @@ import WeatherData from '../WeatherData';
 const App = () => {
   const dispatch = useDispatch();
   const currentLocation = useSelector((state) => state.currentLocation.data);
+  const favoriteLocations = useSelector((state) => state.favoriteLocations);
 
-  // Get the current user location on initial render
   useEffect(() => {
     dispatch(getCurrentLocation());
-  }, []);
 
-  // Set the current location as selected if available (initialized to empty object)
+    const savedLocations = localStorage.getItem('favoriteLocations');
+    if (savedLocations) {
+      const locationsArray = JSON.parse(savedLocations);
+      dispatch(restoreSavedLocations(locationsArray));
+    }
+  }, [dispatch]);
+
   useEffect(() => {
     if (Object.keys(currentLocation).length > 0) {
       dispatch(selectLocation(currentLocation));
     }
-  }, [currentLocation]);
+  }, [currentLocation, dispatch]);
+
+  useEffect(() => {
+    const locations = JSON.stringify(favoriteLocations);
+    localStorage.setItem('favoriteLocations', locations);
+  }, [favoriteLocations]);
 
   return (
     <div className={styles.container}>
