@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Card from '../Card';
-import ForecastItem from '../ForecastItem';
+import ForecastSummaryItem from '../ForecastSummaryItem';
 
 const ForecastSummary = ({ title, forecast }) => (
   <Card>
@@ -9,7 +9,7 @@ const ForecastSummary = ({ title, forecast }) => (
     <ul>
       {forecast.map(
         ({ date, weatherConditions, weatherIcon, temperature, minTemp, maxTemp, onClick }) => (
-          <ForecastItem
+          <ForecastSummaryItem
             key={date}
             date={date}
             weatherConditions={weatherConditions}
