@@ -2,13 +2,19 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styles from './App.module.scss';
 import '../../iconLibrary';
-import { getCurrentLocation, selectLocation, restoreSavedLocations } from '../../actions';
+import {
+  getCurrentLocation,
+  selectLocation,
+  fetchWeatherForecast,
+  restoreSavedLocations,
+} from '../../actions';
 import SearchBar from '../SearchBar';
 import FavoriteLocations from '../FavoriteLocations';
 import WeatherData from '../WeatherData';
 
 const App = () => {
   const dispatch = useDispatch();
+  const { latitude, longitude } = useSelector((state) => state.selectedLocation);
   const currentLocation = useSelector((state) => state.currentLocation.data);
   const favoriteLocations = useSelector((state) => state.favoriteLocations);
 
@@ -27,6 +33,12 @@ const App = () => {
       dispatch(selectLocation(currentLocation));
     }
   }, [currentLocation, dispatch]);
+
+  useEffect(() => {
+    if (latitude && longitude) {
+      dispatch(fetchWeatherForecast(latitude, longitude));
+    }
+  }, [latitude, longitude, dispatch]);
 
   useEffect(() => {
     const locations = JSON.stringify(favoriteLocations);

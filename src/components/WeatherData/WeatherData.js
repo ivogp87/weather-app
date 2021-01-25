@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchWeatherForecast, saveLocation, removeLocation } from '../../actions';
+import { saveLocation, removeLocation } from '../../actions';
 import Status from '../Status';
 import CurrentWeather from '../CurrentWeather';
 
@@ -10,22 +10,16 @@ const WeatherData = () => {
   const weatherForecast = useSelector((state) => state.weatherForecast);
   const dispatch = useDispatch();
 
-  const { fullLocationName, latitude, longitude } = selectedLocation;
-
-  useEffect(() => {
-    if (latitude && longitude) {
-      dispatch(fetchWeatherForecast(latitude, longitude));
-    }
-  }, [latitude, longitude]);
-
   const { status: forecastStatus, data: forecastData, error: forecastError } = weatherForecast;
   const noWeatherData = Object.keys(forecastData).length === 0;
   const isIdle = forecastStatus === 'idle';
   const isLoading = forecastStatus === 'loading';
   const isError = forecastStatus === 'error';
 
+  const { fullLocationName: selectedLocationName } = selectedLocation;
+
   const isFavoriteLocation = favoriteLocations.some(
-    (location) => location.fullLocationName === fullLocationName // fullLocationName is destructured from selectedLocation
+    (location) => location.fullLocationName === selectedLocationName
   );
 
   const handleSaveRemoveLocation = () => {
@@ -55,7 +49,7 @@ const WeatherData = () => {
 
   return (
     <CurrentWeather
-      locationName={fullLocationName}
+      locationName={selectedLocationName}
       temperature={temperature}
       feelsLike={feelsLike}
       minTemp={minTemp}
