@@ -4,7 +4,7 @@ import { saveLocation, removeLocation } from '../../actions';
 import Status from '../Status';
 import CurrentWeather from '../CurrentWeather';
 
-const WeatherData = () => {
+const CurrentWeatherContainer = () => {
   const selectedLocation = useSelector((state) => state.selectedLocation);
   const favoriteLocations = useSelector((state) => state.favoriteLocations);
   const weatherForecast = useSelector((state) => state.weatherForecast);
@@ -65,4 +65,4 @@ const WeatherData = () => {
   );
 };
 
-export default WeatherData;
+export default CurrentWeatherContainer;

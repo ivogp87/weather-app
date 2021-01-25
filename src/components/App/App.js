@@ -10,7 +10,7 @@ import {
 } from '../../actions';
 import SearchBar from '../SearchBar';
 import FavoriteLocations from '../FavoriteLocations';
-import WeatherData from '../WeatherData';
+import CurrentWeatherContainer from '../CurrentWeatherContainer';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -49,7 +49,7 @@ const App = () => {
     <div className={styles.container}>
       <SearchBar />
       <FavoriteLocations />
-      <WeatherData />
+      <CurrentWeatherContainer />
     </div>
   );
 };
