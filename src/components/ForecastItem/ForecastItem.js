@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -13,14 +12,14 @@ const ForecastItem = ({ date, weatherConditions, weatherIcon, minTemp, maxTemp, 
     title="Click to see more details"
     onClick={onClick}
   >
-    <div className={styles.primary}>
+    <div className={styles.itemsLeft}>
       <WeatherIcon icon={weatherIcon} size="medium" />
       <span>
         <p>{date}</p>
         <p>{weatherConditions}</p>
       </span>
     </div>
-    <div className={styles.secondary}>
+    <div className={styles.itemsRight}>
       <TemperatureRange min={minTemp} max={maxTemp} />
       <FontAwesomeIcon className={styles.icon} icon="chevron-down" size="lg" />
     </div>
@@ -33,7 +32,7 @@ ForecastItem.propTypes = {
   weatherIcon: PropTypes.string.isRequired,
   minTemp: PropTypes.number.isRequired,
   maxTemp: PropTypes.number.isRequired,
-  onClick: PropTypes.func.isRequired, // not req ?
+  onClick: PropTypes.func.isRequired,
 };
 
 export default ForecastItem;
