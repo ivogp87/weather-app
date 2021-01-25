@@ -52,7 +52,8 @@ const FavoriteLocations = () => {
       <ul className={menuClass}>
         {favoriteLocations.map((location) => {
           const { fullLocationName } = location;
-          const buttonColor = fullLocationName === selectedLocationName ? 'primary' : 'secondary';
+          const isSelectedLocation = fullLocationName === selectedLocationName;
+          const buttonColor = isSelectedLocation ? 'primary' : 'secondary';
           const buttonIcon = fullLocationName === currentLocationName ? 'map-marker-alt' : '';
 
           return (
@@ -62,6 +63,7 @@ const FavoriteLocations = () => {
                 icon={buttonIcon}
                 color={buttonColor}
                 className={buttonClass}
+                disabled={isSelectedLocation}
               >
                 {fullLocationName}
               </Button>
