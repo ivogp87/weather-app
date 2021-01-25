@@ -1,0 +1,39 @@
+@import '../../styles/variables';
+
+.forecastItem {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 3px solid $color-quaternary;
+  cursor: pointer;
+
+  &:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+}
+
+.primary {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+
+  p {
+    margin: 0 0 0 5px;
+  }
+}
+
+.secondary {
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  margin-left: 10px;
+
+  &:hover {
+    color: $text-primary-light;
+  }
+}
