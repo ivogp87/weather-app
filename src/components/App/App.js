@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styles from './App.module.scss';
-import '../../iconLibrary';
+import '../../utils/iconLibrary';
 import {
   getCurrentLocation,
   selectLocation,
