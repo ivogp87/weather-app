@@ -1,16 +1,17 @@
 @import '../../styles/variables';
 
-.forecastItem {
+.summaryItem {
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
-  padding-bottom: 10px;
-  border-bottom: 3px solid $color-quaternary;
+  padding: 10px 0;
+  border-bottom: 2px solid $color-quaternary;
   cursor: pointer;
 
+  &:hover {
+    background: $color-primary;
+  }
+
   &:last-child {
-    margin-bottom: 0;
-    padding-bottom: 0;
     border-bottom: 0;
   }
 }
