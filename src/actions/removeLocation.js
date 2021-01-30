@@ -1,8 +1,8 @@
 import { REMOVE_LOCATION } from './actionTypes';
 
-const removeLocation = (location) => ({
+const removeLocation = (locationObject) => ({
   type: REMOVE_LOCATION,
-  payload: location,
+  payload: locationObject,
 });
 
 export default removeLocation;

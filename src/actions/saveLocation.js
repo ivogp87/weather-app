@@ -1,8 +1,8 @@
 import { SAVE_LOCATION } from './actionTypes';
 
-const saveLocation = (location) => ({
+const saveLocation = (locationObject) => ({
   type: SAVE_LOCATION,
-  payload: location,
+  payload: locationObject,
 });
 
 export default saveLocation;

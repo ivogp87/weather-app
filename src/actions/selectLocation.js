@@ -1,8 +1,8 @@
 import { SELECT_LOCATION } from './actionTypes';
 
-const selectLocation = (location) => ({
+const selectLocation = (locationObject) => ({
   type: SELECT_LOCATION,
-  payload: location,
+  payload: locationObject,
 });
 
 export default selectLocation;
