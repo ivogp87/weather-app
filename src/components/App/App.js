@@ -11,6 +11,7 @@ import {
 import SearchBar from '../SearchBar';
 import FavoriteLocations from '../FavoriteLocations';
 import CurrentWeatherContainer from '../CurrentWeatherContainer';
+import WeeklyForecast from '../WeeklyForecast';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -41,8 +42,12 @@ const App = () => {
   }, [latitude, longitude, dispatch]);
 
   useEffect(() => {
-    const locations = JSON.stringify(favoriteLocations);
-    localStorage.setItem('favoriteLocations', locations);
+    if (favoriteLocations.length > 0) {
+      const locations = JSON.stringify(favoriteLocations);
+      localStorage.setItem('favoriteLocations', locations);
+    } else {
+      localStorage.removeItem('favoriteLocations');
+    }
   }, [favoriteLocations]);
 
   return (
@@ -50,6 +55,7 @@ const App = () => {
       <SearchBar />
       <FavoriteLocations />
       <CurrentWeatherContainer />
+      <WeeklyForecast />
     </div>
   );
 };
