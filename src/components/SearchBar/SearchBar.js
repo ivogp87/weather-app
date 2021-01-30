@@ -66,7 +66,7 @@ const SearchBar = () => {
 
   return (
     <header className={styles.searchBar}>
-      <h1>What is the weather in</h1>
+      <h1>What Is The Weather In</h1>
       <div className={styles.searchFormContainer}>
         <form onSubmit={handleSubmit} className={styles.searchForm}>
           <TextInput
