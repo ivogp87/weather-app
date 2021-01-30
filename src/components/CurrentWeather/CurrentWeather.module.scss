@@ -5,6 +5,10 @@
 .currentWeatherHeader {
   display: flex;
 
+  h2 {
+    flex-grow: 1;
+  }
+
   .favoriteButton {
     color: #f0b400;
 
@@ -20,8 +24,7 @@
   justify-content: space-around;
 }
 
-.weatherNow,
-.forecastSummary {
+.flexColumn {
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -4,8 +4,6 @@ import styles from './CurrentWeather.module.scss';
 import Card from '../Card';
 import IconButton from '../IconButton';
 import Temperature from '../Temperature';
-import TemperatureRange from '../TemperatureRange';
-import Wind from '../Wind';
 import WeatherIcon from '../WeatherIcon';
 import Status from '../Status';
 
@@ -13,22 +11,20 @@ const CurrentWeather = ({
   locationName,
   temperature,
   feelsLike,
-  minTemp,
-  maxTemp,
-  windSpeed,
-  windDegrees,
-  weatherConditions,
+  description,
   weatherIcon,
   isLoading,
   onClick,
   isFavorite,
 }) => {
   const iconName = isFavorite ? 'star' : ['far', 'star'];
+  const buttonTitle = isFavorite ? 'Remove from your locations' : 'Add to your locations';
 
   const renderLoadingSpinner = () => {
     if (!isLoading) return null;
 
     const message = `Loading weather forecast for ${locationName}`;
+
     return (
       <div className={styles.loadingSpinner}>
         <Status type="loading">{message}</Status>
@@ -41,11 +37,12 @@ const CurrentWeather = ({
       <Card>
         <div className={styles.currentWeatherHeader}>
           <h2>
-            Current weather in &nbsp;
+            Current Weather Conditions In&nbsp;
             {locationName}
           </h2>
           <IconButton
             type="button"
+            title={buttonTitle}
             className={styles.favoriteButton}
             icon={iconName}
             onClick={onClick}
@@ -53,22 +50,16 @@ const CurrentWeather = ({
           />
         </div>
         <div className={styles.currentWeatherInfo}>
-          <div className={styles.weatherNow}>
+          <div className={styles.flexColumn}>
             <Temperature temp={temperature} size="large" />
-            <div>
-              <p>
-                feels like &nbsp;
-                <Temperature temp={feelsLike} />
-              </p>
-              <p>{weatherConditions}</p>
-            </div>
+            <p>
+              feels like &nbsp;
+              <Temperature temp={feelsLike} />
+            </p>
           </div>
-          <div className={styles.forecastSummary}>
+          <div className={styles.flexColumn}>
             <WeatherIcon icon={weatherIcon} size="large" />
-            <div>
-              <TemperatureRange min={minTemp} max={maxTemp} />
-              <Wind speed={windSpeed} degrees={windDegrees} />
-            </div>
+            <p>{description}</p>
           </div>
         </div>
         {renderLoadingSpinner()}
@@ -81,11 +72,7 @@ CurrentWeather.propTypes = {
   locationName: PropTypes.string.isRequired,
   temperature: PropTypes.number.isRequired,
   feelsLike: PropTypes.number.isRequired,
-  minTemp: PropTypes.number.isRequired,
-  maxTemp: PropTypes.number.isRequired,
-  windSpeed: PropTypes.number.isRequired,
-  windDegrees: PropTypes.number.isRequired,
-  weatherConditions: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
   weatherIcon: PropTypes.string.isRequired,
   isLoading: PropTypes.bool.isRequired,
   isFavorite: PropTypes.bool.isRequired,

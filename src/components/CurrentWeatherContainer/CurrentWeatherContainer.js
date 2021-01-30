@@ -16,6 +16,10 @@ const CurrentWeatherContainer = () => {
   const isLoading = forecastStatus === 'loading';
   const isError = forecastStatus === 'error';
 
+  if (isIdle && noWeatherData) return null;
+  if (isLoading && noWeatherData) return <Status type="loading">Loading weather forecast</Status>;
+  if (isError) return <Status type="error">{forecastError}</Status>;
+
   const { fullLocationName: selectedLocationName } = selectedLocation;
 
   const isFavoriteLocation = favoriteLocations.some(
@@ -30,37 +34,27 @@ const CurrentWeatherContainer = () => {
     }
   };
 
-  if (noWeatherData && isIdle) return null;
-
-  if (isLoading && noWeatherData) return <Status type="loading">Loading weather forecast</Status>;
-
-  if (isError) return <Status type="error">{forecastError}</Status>;
-
   const {
-    temp: temperature,
+    temp,
     feels_like: feelsLike,
     wind_speed: windSpeed,
     wind_deg: windDegrees,
     weather,
   } = forecastData.current;
-
-  const { description: weatherConditions, icon: weatherIcon } = weather[0];
-  const { min: minTemp, max: maxTemp } = forecastData.daily[0].temp;
+  const { description, icon } = weather[0];
 
   return (
     <CurrentWeather
       locationName={selectedLocationName}
-      temperature={temperature}
+      temperature={temp}
       feelsLike={feelsLike}
-      minTemp={minTemp}
-      maxTemp={maxTemp}
       windSpeed={windSpeed}
       windDegrees={windDegrees}
-      weatherConditions={weatherConditions}
-      weatherIcon={weatherIcon}
+      description={description}
+      weatherIcon={icon}
       isLoading={isLoading}
-      onClick={handleSaveRemoveLocation}
       isFavorite={isFavoriteLocation}
+      onClick={handleSaveRemoveLocation}
     />
   );
 };
