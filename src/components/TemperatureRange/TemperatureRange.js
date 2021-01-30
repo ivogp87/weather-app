@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Temperature from '../Temperature';
+import TemperatureCard from '../TemperatureCard';
 
 const TemperatureRange = ({ min, max, size }) => (
   <p>
-    <Temperature temp={min} size={size} />
+    <TemperatureCard temp={min} size={size} />
     &nbsp;/&nbsp;
-    <Temperature temp={max} size={size} />
+    <TemperatureCard temp={max} size={size} />
   </p>
 );
 

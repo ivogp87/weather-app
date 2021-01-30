@@ -1,21 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styles from './Temperature.module.scss';
+import styles from './TemperatureCard.module.scss';
 
-const Temperature = ({ temp, size }) => (
+const TemperatureCard = ({ temp, size }) => (
   <span className={styles[size]}>
     {Math.round(temp)}
     &nbsp;&deg;C
   </span>
 );
 
-Temperature.propTypes = {
+TemperatureCard.propTypes = {
   temp: PropTypes.number.isRequired,
   size: PropTypes.oneOf(['small', 'medium', 'large']),
 };
 
-Temperature.defaultProps = {
+TemperatureCard.defaultProps = {
   size: 'small',
 };
 
-export default Temperature;
+export default TemperatureCard;

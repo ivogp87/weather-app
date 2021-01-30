@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styles from './CurrentWeather.module.scss';
 import Card from '../Card';
 import IconButton from '../IconButton';
-import Temperature from '../Temperature';
+import TemperatureCard from '../TemperatureCard';
 import WeatherIcon from '../WeatherIcon';
 import Status from '../Status';
 
@@ -51,10 +51,10 @@ const CurrentWeather = ({
         </div>
         <div className={styles.currentWeatherInfo}>
           <div className={styles.flexColumn}>
-            <Temperature temp={temperature} size="large" />
+            <TemperatureCard temp={temperature} size="large" />
             <p>
               feels like &nbsp;
-              <Temperature temp={feelsLike} />
+              <TemperatureCard temp={feelsLike} />
             </p>
           </div>
           <div className={styles.flexColumn}>
