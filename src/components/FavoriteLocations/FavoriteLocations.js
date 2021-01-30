@@ -9,7 +9,6 @@ import Button from '../Button';
 const FavoriteLocations = () => {
   const dispatch = useDispatch();
   const favoriteLocations = useSelector((state) => state.favoriteLocations);
-  const currentLocationName = useSelector((state) => state.currentLocation.data.fullLocationName);
   const selectedLocationName = useSelector((state) => state.selectedLocation.fullLocationName);
 
   const handleSelectLocation = (locationObject) => {
@@ -54,13 +53,11 @@ const FavoriteLocations = () => {
           const { fullLocationName } = location;
           const isSelectedLocation = fullLocationName === selectedLocationName;
           const buttonColor = isSelectedLocation ? 'primary' : 'secondary';
-          const buttonIcon = fullLocationName === currentLocationName ? 'map-marker-alt' : '';
 
           return (
             <li key={fullLocationName}>
               <Button
                 onClick={() => handleSelectLocation(location)}
-                icon={buttonIcon}
                 color={buttonColor}
                 className={buttonClass}
                 disabled={isSelectedLocation}
