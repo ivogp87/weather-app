@@ -57,7 +57,7 @@ const SearchBar = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!formError && touched) {
+    if (!formError) {
       dispatch(fetchLocationsList(locationName));
     } else {
       setTouched(true);
