@@ -1,11 +1,11 @@
 import {
-  LOCATION_DETAILS_LOADING,
+  LOCATION_DETAILS_REQUEST,
   LOCATION_DETAILS_SUCCESS,
   LOCATION_DETAILS_ERROR,
 } from './actionTypes';
 import { fetchLocationDetails } from '../apis/openWeatherMap';
 
-const fetchLocationDetailsStart = () => ({ type: LOCATION_DETAILS_LOADING });
+const fetchLocationDetailsStart = () => ({ type: LOCATION_DETAILS_REQUEST });
 
 const fetchLocationDetailsSuccess = (locationDetails) => ({
   type: LOCATION_DETAILS_SUCCESS,

@@ -1,11 +1,11 @@
 import {
-  LOCATIONS_LIST_LOADING,
+  LOCATIONS_LIST_REQUEST,
   LOCATIONS_LIST_SUCCESS,
   LOCATIONS_LIST_ERROR,
 } from './actionTypes';
 import { fetchLocationsByName } from '../apis/openWeatherMap';
 
-const fetchLocationsListStart = () => ({ type: LOCATIONS_LIST_LOADING });
+const fetchLocationsListStart = () => ({ type: LOCATIONS_LIST_REQUEST });
 
 const fetchLocationsListSuccess = (locationsList) => ({
   type: LOCATIONS_LIST_SUCCESS,

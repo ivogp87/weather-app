@@ -1,5 +1,5 @@
 import {
-  WEATHER_FORECAST_LOADING,
+  WEATHER_FORECAST_REQUEST,
   WEATHER_FORECAST_SUCCESS,
   WEATHER_FORECAST_ERROR,
 } from '../actions/actionTypes';
@@ -11,7 +11,7 @@ const initialState = {
 
 const weatherForecastReducer = (state = initialState, action) => {
   switch (action.type) {
-    case WEATHER_FORECAST_LOADING:
+    case WEATHER_FORECAST_REQUEST:
       return { ...state, status: 'loading' };
     case WEATHER_FORECAST_SUCCESS:
       return { ...initialState, data: action.payload };

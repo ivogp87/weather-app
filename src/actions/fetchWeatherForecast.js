@@ -1,11 +1,11 @@
 import {
-  WEATHER_FORECAST_LOADING,
+  WEATHER_FORECAST_REQUEST,
   WEATHER_FORECAST_SUCCESS,
   WEATHER_FORECAST_ERROR,
 } from './actionTypes';
 import { fetchForecast } from '../apis/openWeatherMap';
 
-const weatherForecastLoading = () => ({ type: WEATHER_FORECAST_LOADING });
+const weatherForecastLoading = () => ({ type: WEATHER_FORECAST_REQUEST });
 
 const weatherForecastSuccess = (weatherForecast) => ({
   type: WEATHER_FORECAST_SUCCESS,

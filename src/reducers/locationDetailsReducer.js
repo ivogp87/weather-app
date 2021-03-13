@@ -1,5 +1,5 @@
 import {
-  LOCATION_DETAILS_LOADING,
+  LOCATION_DETAILS_REQUEST,
   LOCATION_DETAILS_SUCCESS,
   LOCATION_DETAILS_ERROR,
 } from '../actions/actionTypes';
@@ -11,7 +11,7 @@ const initialState = {
 
 const locationDetailsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case LOCATION_DETAILS_LOADING:
+    case LOCATION_DETAILS_REQUEST:
       return { ...state, status: 'loading' };
     case LOCATION_DETAILS_SUCCESS:
       return { status: 'idle', data: action.payload };
