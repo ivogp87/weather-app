@@ -5,7 +5,7 @@ import styles from './TemperatureCard.module.scss';
 const TemperatureCard = ({ temp, size }) => (
   <span className={styles[size]}>
     {Math.round(temp)}
-    &nbsp;&deg;C
+    &nbsp;&deg;
   </span>
 );
 
