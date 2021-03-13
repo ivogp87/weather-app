@@ -1,41 +1,28 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { selectLocation } from '../../actions';
+import PropTypes from 'prop-types';
 import styles from './FavoriteLocations.module.scss';
 import Card from '../Card';
 import IconButton from '../IconButton';
 import Button from '../Button';
 
-const FavoriteLocations = () => {
-  const dispatch = useDispatch();
-  const favoriteLocations = useSelector((state) => state.favoriteLocations);
-  const selectedLocationName = useSelector((state) => state.selectedLocation.fullLocationName);
-
-  const handleSelectLocation = (locationObject) => {
-    dispatch(selectLocation(locationObject));
-  };
-
-  const [isOpen, setIsOpen] = useState(false);
-
-  // Close the mobile menu on click outside the menu and when menu item is clicked
+const FavoriteLocations = ({ locationsList, selectedLocationName, onClick }) => {
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
+  // Close the mobile menu on click outside
   // eslint-disable-next-line consistent-return
   useEffect(() => {
-    if (isOpen) {
+    if (showMobileMenu) {
       const closeMenu = () => {
-        setIsOpen(false);
+        setShowMobileMenu(false);
       };
 
       document.addEventListener('click', closeMenu);
       return () => document.removeEventListener('click', closeMenu);
     }
-  }, [isOpen]);
+  }, [showMobileMenu]);
 
-  const menuClass = isOpen
+  const menuClass = showMobileMenu
     ? `${styles.locationsMenu} ${styles.locationsMenuActive}`
     : styles.locationsMenu;
-  const buttonClass = isOpen ? styles.mobileButton : '';
-
-  if (favoriteLocations.length === 0) return null;
 
   return (
     <Card>
@@ -44,25 +31,24 @@ const FavoriteLocations = () => {
         <IconButton
           type="button"
           className={styles.menuIcon}
-          onClick={() => setIsOpen(!isOpen)}
-          icon={isOpen ? 'times' : 'bars'}
+          onClick={() => setShowMobileMenu((currentState) => !currentState)}
+          icon={showMobileMenu ? 'times' : 'bars'}
         />
       </header>
       <ul className={menuClass}>
-        {favoriteLocations.map((location) => {
-          const { fullLocationName } = location;
-          const isSelectedLocation = fullLocationName === selectedLocationName;
-          const buttonColor = isSelectedLocation ? 'primary' : 'secondary';
+        {locationsList.map((location) => {
+          const { locationName, lat, lon } = location;
+          const isSelectedLocation = locationName === selectedLocationName;
 
           return (
-            <li key={fullLocationName}>
+            <li key={locationName}>
               <Button
-                onClick={() => handleSelectLocation(location)}
-                color={buttonColor}
-                className={buttonClass}
+                onClick={() => onClick(lat, lon)}
+                color={isSelectedLocation ? 'primary' : 'secondary'}
+                className={showMobileMenu ? styles.mobileButton : ''}
                 disabled={isSelectedLocation}
               >
-                {fullLocationName}
+                {locationName}
               </Button>
             </li>
           );
@@ -70,6 +56,18 @@ const FavoriteLocations = () => {
       </ul>
     </Card>
   );
+};
+
+FavoriteLocations.propTypes = {
+  locationsList: PropTypes.arrayOf(
+    PropTypes.shape({
+      locationName: PropTypes.string.isRequired,
+      lat: PropTypes.number.isRequired,
+      lon: PropTypes.number.isRequired,
+    })
+  ).isRequired,
+  selectedLocationName: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
 };
 
 export default FavoriteLocations;
