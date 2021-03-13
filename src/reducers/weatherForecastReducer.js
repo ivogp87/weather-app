@@ -6,18 +6,17 @@ import {
 
 const initialState = {
   status: 'idle',
-  data: {},
-  error: '',
+  data: null,
 };
 
 const weatherForecastReducer = (state = initialState, action) => {
   switch (action.type) {
     case WEATHER_FORECAST_LOADING:
-      return { ...state, status: 'loading', error: '' };
+      return { ...state, status: 'loading' };
     case WEATHER_FORECAST_SUCCESS:
-      return { status: 'idle', data: action.payload, error: '' };
+      return { ...initialState, data: action.payload };
     case WEATHER_FORECAST_ERROR:
-      return { status: 'error', data: {}, error: action.payload };
+      return { ...initialState, status: 'error' };
     default:
       return state;
   }

@@ -3,7 +3,7 @@ import {
   WEATHER_FORECAST_SUCCESS,
   WEATHER_FORECAST_ERROR,
 } from './actionTypes';
-import openWeatherMap from '../apis/openWeatherMap';
+import { getWeatherForecast } from '../apis/openWeatherMap';
 
 const weatherForecastLoading = () => ({ type: WEATHER_FORECAST_LOADING });
 
@@ -12,21 +12,15 @@ const weatherForecastSuccess = (weatherForecast) => ({
   payload: weatherForecast,
 });
 
-const weatherForecastError = (error) => ({
-  type: WEATHER_FORECAST_ERROR,
-  payload: error,
-});
+const weatherForecastError = () => ({ type: WEATHER_FORECAST_ERROR });
 
 const fetchWeatherForecast = (latitude, longitude) => async (dispatch) => {
   dispatch(weatherForecastLoading());
   try {
-    const weatherForecast = await openWeatherMap.get(
-      `/data/2.5/onecall?lat=${latitude}&lon=${longitude}&units=metric&exclude=minutely`
-    );
-
+    const weatherForecast = await getWeatherForecast(latitude, longitude);
     dispatch(weatherForecastSuccess(weatherForecast.data));
   } catch (error) {
-    dispatch(weatherForecastError(error.message));
+    dispatch(weatherForecastError());
   }
 };
 
