@@ -3,7 +3,7 @@ import {
   LOCATIONS_LIST_SUCCESS,
   LOCATIONS_LIST_ERROR,
 } from './actionTypes';
-import getLocationCoordinates from '../utils/getLocationCoordinates';
+import { getLocationsByName } from '../apis/openWeatherMap';
 
 const fetchLocationsListStart = () => ({ type: LOCATIONS_LIST_LOADING });
 
@@ -12,21 +12,15 @@ const fetchLocationsListSuccess = (locationsList) => ({
   payload: locationsList,
 });
 
-const fetchLocationsListError = (error) => ({
-  type: LOCATIONS_LIST_ERROR,
-  payload: error,
-});
+const fetchLocationsListError = () => ({ type: LOCATIONS_LIST_ERROR });
 
 const fetchLocationsList = (locationName) => async (dispatch) => {
   dispatch(fetchLocationsListStart());
   try {
-    const locationsList = await getLocationCoordinates(locationName);
-
-    if (locationsList.error) throw new Error(locationsList.error);
-
-    dispatch(fetchLocationsListSuccess(locationsList));
+    const locationsList = await getLocationsByName(locationName);
+    dispatch(fetchLocationsListSuccess(locationsList.data));
   } catch (error) {
-    dispatch(fetchLocationsListError(error.message));
+    dispatch(fetchLocationsListError());
   }
 };
 

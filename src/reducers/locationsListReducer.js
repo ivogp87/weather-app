@@ -6,18 +6,17 @@ import {
 
 const initialState = {
   status: 'idle',
-  data: [],
-  error: '',
+  data: null,
 };
 
 const locationsListReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOCATIONS_LIST_LOADING:
-      return { status: 'loading', data: [], error: '' };
+      return { ...state, status: 'loading' };
     case LOCATIONS_LIST_SUCCESS:
-      return { status: 'idle', data: action.payload, error: '' };
+      return { status: 'idle', data: action.payload };
     case LOCATIONS_LIST_ERROR:
-      return { status: 'error', data: [], error: action.payload };
+      return { ...state.data, status: 'error' };
     default:
       return state;
   }
