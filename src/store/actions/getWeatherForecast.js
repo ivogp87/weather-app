@@ -3,7 +3,7 @@ import {
   WEATHER_FORECAST_SUCCESS,
   WEATHER_FORECAST_ERROR,
 } from './actionTypes';
-import { fetchForecast } from '../apis/openWeatherMap';
+import { fetchForecast } from '../../apis/openWeatherMap';
 
 const getWeatherForecastRequest = () => ({ type: WEATHER_FORECAST_REQUEST });
 

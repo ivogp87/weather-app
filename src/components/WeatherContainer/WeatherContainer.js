@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { toggleFavoriteLocations } from '../../actions';
+import { toggleFavoriteLocations } from '../../store/actions';
 import formatLocationName from '../../utils/formatLocationName';
 
 import CurrentWeather from '../CurrentWeather';

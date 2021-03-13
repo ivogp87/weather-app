@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getWeatherForecast, getLocationDetails, restoreSavedLocations } from '../../actions';
+import { getWeatherForecast, getLocationDetails, restoreSavedLocations } from '../../store/actions';
 import formatLocationName from '../../utils/formatLocationName';
 import FavoriteLocations from '../FavoriteLocations';
 

@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-// eslint-disable-next-line import/no-named-as-default, import/no-named-as-default-member
+
 import reportWebVitals from './reportWebVitals';
-import store from './store';
+import store from './store/store';
 import './styles/index.scss';
 import App from './components/App';
 

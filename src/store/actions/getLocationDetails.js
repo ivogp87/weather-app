@@ -3,7 +3,7 @@ import {
   LOCATION_DETAILS_SUCCESS,
   LOCATION_DETAILS_ERROR,
 } from './actionTypes';
-import { fetchLocationDetails } from '../apis/openWeatherMap';
+import { fetchLocationDetails } from '../../apis/openWeatherMap';
 
 const getLocationDetailsRequest = () => ({ type: LOCATION_DETAILS_REQUEST });
 
