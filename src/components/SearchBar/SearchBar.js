@@ -1,93 +1,60 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React from 'react';
+import PropTypes from 'prop-types';
 import styles from './SearchBar.module.scss';
-import { selectLocation, fetchLocationsList } from '../../actions';
-import TextInput from '../TextInput';
 import IconButton from '../IconButton';
-import Status from '../Status';
 import SearchBarDropdown from '../SearchBarDropdown';
+import ErrorMessage from '../ErrorMessage';
 
-const SearchBar = () => {
-  const [locationName, setLocationName] = useState('');
-  const [touched, setTouched] = useState(false);
-  const [formError, setFormError] = useState('');
-  const [showDropdown, setShowDropdown] = useState(false);
+const SearchBar = ({
+  searchTerm,
+  onChange,
+  onSubmit,
+  showDropdown,
+  onDropdownClick,
+  locationsList,
+  searchError,
+}) => (
+  <header className={styles.searchBar}>
+    <div className={styles.searchFormContainer}>
+      <form onSubmit={onSubmit} className={styles.searchForm}>
+        <input
+          type="text"
+          className={styles.textInput}
+          value={searchTerm}
+          placeholder="Enter location name, e.g. Sofia"
+          onChange={onChange}
+          required
+        />
+        <IconButton type="submit" icon="search" color="primary" className={styles.submitButton} />
+      </form>
+      {showDropdown && (
+        <SearchBarDropdown locationsList={locationsList} onClick={onDropdownClick} />
+      )}
+    </div>
+    <div className={styles.errorMessageContainer}>
+      {searchError && <ErrorMessage>{searchError}</ErrorMessage>}
+    </div>
+  </header>
+);
 
-  const dispatch = useDispatch();
-  const { status: locationsStatus, data: locationsList, error: locationsError } = useSelector(
-    (state) => state.locationsList
-  );
+SearchBar.propTypes = {
+  searchTerm: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  showDropdown: PropTypes.bool.isRequired,
+  onDropdownClick: PropTypes.func.isRequired,
+  searchError: PropTypes.string,
+  locationsList: PropTypes.arrayOf(
+    PropTypes.shape({
+      locationName: PropTypes.string.isRequired,
+      lat: PropTypes.number.isRequired,
+      lon: PropTypes.number.isRequired,
+    })
+  ).isRequired,
+};
 
-  const handleSelectLocation = (location) => {
-    setShowDropdown(false);
-    dispatch(selectLocation(location));
-  };
-
-  useEffect(() => {
-    if (locationsList.length === 1) {
-      handleSelectLocation(locationsList[0]);
-    } else {
-      setShowDropdown(true);
-    }
-  }, [locationsList]);
-
-  // eslint-disable-next-line consistent-return
-  useEffect(() => {
-    const closeDropdown = () => setShowDropdown(false);
-    if (showDropdown) {
-      document.addEventListener('click', closeDropdown);
-      return () => document.removeEventListener('click', closeDropdown);
-    }
-  }, [showDropdown]);
-
-  useEffect(() => {
-    const validate = () => {
-      if (!locationName) {
-        setFormError('You must enter a location name.');
-      } else {
-        setFormError('');
-      }
-    };
-
-    validate();
-  }, [locationName]);
-
-  const handleChange = (e) => setLocationName(e.target.value);
-  const handleBlur = () => setTouched(true);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!formError) {
-      dispatch(fetchLocationsList(locationName));
-    } else {
-      setTouched(true);
-    }
-  };
-
-  return (
-    <header className={styles.searchBar}>
-      <h1>What Is The Weather In</h1>
-      <div className={styles.searchFormContainer}>
-        <form onSubmit={handleSubmit} className={styles.searchForm}>
-          <TextInput
-            value={locationName}
-            placeholder="Enter location name, e.g. Sofia"
-            onChange={handleChange}
-            onBlur={handleBlur}
-          />
-          <IconButton type="submit" icon="search" color="primary" className={styles.submitButton} />
-        </form>
-        {showDropdown && (
-          <SearchBarDropdown locationsList={locationsList} onClick={handleSelectLocation} />
-        )}
-      </div>
-      <div className={styles.statusMessages}>
-        {touched && formError && <Status type="error">{formError}</Status>}
-        {locationsStatus === 'error' && <Status type="error">{locationsError}</Status>}
-        {locationsStatus === 'loading' && <Status type="loading">Loading...</Status>}
-      </div>
-    </header>
-  );
+SearchBar.defaultProps = {
+  searchError: '',
 };
 
 export default SearchBar;
