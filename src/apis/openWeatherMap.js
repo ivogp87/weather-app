@@ -19,13 +19,13 @@ openWeatherMap.interceptors.response.use((response) => {
   return response;
 });
 
-export const getLocationName = (latitude, longitude) =>
+export const fetchLocationDetails = (latitude, longitude) =>
   openWeatherMap.get(`/geo/1.0/reverse?lat=${latitude}&lon=${longitude}`);
 
-export const getLocationsByName = (locationName) =>
+export const fetchLocationsByName = (locationName) =>
   openWeatherMap.get(`/geo/1.0/direct?q=${locationName}&limit=10`);
 
-export const getWeatherForecast = (latitude, longitude) =>
+export const fetchForecast = (latitude, longitude) =>
   openWeatherMap.get(
     `/data/2.5/onecall?lat=${latitude}&lon=${longitude}&units=metric&exclude=minutely`
   );

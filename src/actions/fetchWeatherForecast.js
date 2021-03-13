@@ -3,7 +3,7 @@ import {
   WEATHER_FORECAST_SUCCESS,
   WEATHER_FORECAST_ERROR,
 } from './actionTypes';
-import { getWeatherForecast } from '../apis/openWeatherMap';
+import { fetchForecast } from '../apis/openWeatherMap';
 
 const weatherForecastLoading = () => ({ type: WEATHER_FORECAST_LOADING });
 
@@ -14,14 +14,14 @@ const weatherForecastSuccess = (weatherForecast) => ({
 
 const weatherForecastError = () => ({ type: WEATHER_FORECAST_ERROR });
 
-const fetchWeatherForecast = (latitude, longitude) => async (dispatch) => {
+const getWeatherForecast = (latitude, longitude) => async (dispatch) => {
   dispatch(weatherForecastLoading());
   try {
-    const weatherForecast = await getWeatherForecast(latitude, longitude);
+    const weatherForecast = await fetchForecast(latitude, longitude);
     dispatch(weatherForecastSuccess(weatherForecast.data));
   } catch (error) {
     dispatch(weatherForecastError());
   }
 };
 
-export default fetchWeatherForecast;
+export default getWeatherForecast;
