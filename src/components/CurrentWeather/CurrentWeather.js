@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from './CurrentWeather.module.scss';
 import Card from '../Card';
 import IconButton from '../IconButton';
 import TemperatureCard from '../TemperatureCard';
 import WeatherIcon from '../WeatherIcon';
-import Status from '../Status';
 
 const CurrentWeather = ({
   locationName,
@@ -13,42 +13,30 @@ const CurrentWeather = ({
   feelsLike,
   description,
   weatherIcon,
-  isLoading,
-  onClick,
-  isFavorite,
+  isFavoriteLocation,
+  onFavoriteClick,
 }) => {
-  const iconName = isFavorite ? 'star' : ['far', 'star'];
-  const buttonTitle = isFavorite ? 'Remove from your locations' : 'Add to your locations';
-
-  const renderLoadingSpinner = () => {
-    if (!isLoading) return null;
-
-    const message = `Loading weather forecast for ${locationName}`;
-
-    return (
-      <div className={styles.loadingSpinner}>
-        <Status type="loading">{message}</Status>
-      </div>
-    );
-  };
+  const iconName = isFavoriteLocation ? 'star' : ['far', 'star'];
+  const buttonTitle = isFavoriteLocation ? 'Remove from your locations' : 'Add to your locations';
 
   return (
     <div className={styles.currentWeather}>
       <Card>
         <div className={styles.currentWeatherHeader}>
-          <h2>
-            Current Weather Conditions In&nbsp;
-            {locationName}
-          </h2>
+          <h2>Current Weather</h2>
           <IconButton
             type="button"
             title={buttonTitle}
             className={styles.favoriteButton}
             icon={iconName}
-            onClick={onClick}
+            onClick={() => onFavoriteClick(locationName)}
             size="large"
           />
         </div>
+        <p>
+          <FontAwesomeIcon icon="map-marker-alt" className={styles.locationIcon} />
+          {locationName}
+        </p>
         <div className={styles.currentWeatherInfo}>
           <div className={styles.flexColumn}>
             <TemperatureCard temp={temperature} size="large" />
@@ -62,7 +50,6 @@ const CurrentWeather = ({
             <p>{description}</p>
           </div>
         </div>
-        {renderLoadingSpinner()}
       </Card>
     </div>
   );
@@ -74,9 +61,8 @@ CurrentWeather.propTypes = {
   feelsLike: PropTypes.number.isRequired,
   description: PropTypes.string.isRequired,
   weatherIcon: PropTypes.string.isRequired,
-  isLoading: PropTypes.bool.isRequired,
-  isFavorite: PropTypes.bool.isRequired,
-  onClick: PropTypes.func.isRequired,
+  isFavoriteLocation: PropTypes.bool.isRequired,
+  onFavoriteClick: PropTypes.func.isRequired,
 };
 
 export default CurrentWeather;

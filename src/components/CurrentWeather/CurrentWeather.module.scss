@@ -7,6 +7,7 @@
 
   h2 {
     flex-grow: 1;
+    margin-bottom: 0px;
   }
 
   .favoriteButton {
@@ -16,6 +17,10 @@
       color: #ffc517;
     }
   }
+}
+
+.locationIcon {
+  margin-right: 10px;
 }
 
 .currentWeatherInfo {
@@ -30,19 +35,19 @@
   align-items: center;
 }
 
-.loadingSpinner {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+// .loadingSpinner {
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   width: 100%;
+//   height: 100%;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
 
-  & > * {
-    padding: 10px;
-    background: rgba(255, 255, 255, 0.8);
-    font-weight: 500;
-  }
-}
+//   & > * {
+//     padding: 10px;
+//     background: rgba(255, 255, 255, 0.8);
+//     font-weight: 500;
+//   }
+// }
