@@ -5,22 +5,22 @@ import {
 } from './actionTypes';
 import { fetchForecast } from '../apis/openWeatherMap';
 
-const weatherForecastLoading = () => ({ type: WEATHER_FORECAST_REQUEST });
+const getWeatherForecastRequest = () => ({ type: WEATHER_FORECAST_REQUEST });
 
-const weatherForecastSuccess = (weatherForecast) => ({
+const getForecastSuccess = (weatherForecast) => ({
   type: WEATHER_FORECAST_SUCCESS,
   payload: weatherForecast,
 });
 
-const weatherForecastError = () => ({ type: WEATHER_FORECAST_ERROR });
+const getWeatherForecastError = () => ({ type: WEATHER_FORECAST_ERROR });
 
 const getWeatherForecast = (latitude, longitude) => async (dispatch) => {
-  dispatch(weatherForecastLoading());
+  dispatch(getWeatherForecastRequest());
   try {
     const weatherForecast = await fetchForecast(latitude, longitude);
-    dispatch(weatherForecastSuccess(weatherForecast.data));
+    dispatch(getForecastSuccess(weatherForecast.data));
   } catch (error) {
-    dispatch(weatherForecastError());
+    dispatch(getWeatherForecastError());
   }
 };
 

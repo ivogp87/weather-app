@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchWeatherForecast, fetchLocationDetails, fetchLocationsList } from '../../actions';
+import { getWeatherForecast, getLocationDetails, getLocationsList } from '../../actions';
 import formatLocationName from '../../utils/formatLocationName';
 import SearchBar from '../SearchBar';
 
@@ -14,8 +14,8 @@ const SearchContainer = () => {
   useEffect(() => {
     const getForecastForCurrentLocation = (geolocationPosition) => {
       const { latitude, longitude } = geolocationPosition.coords;
-      dispatch(fetchWeatherForecast(latitude, longitude));
-      dispatch(fetchLocationDetails(latitude, longitude));
+      dispatch(getWeatherForecast(latitude, longitude));
+      dispatch(getLocationDetails(latitude, longitude));
     };
 
     if (navigator.geolocation) {
@@ -29,8 +29,8 @@ const SearchContainer = () => {
   useEffect(() => {
     if (locationsList && locationsList.length === 1) {
       const { lat, lon } = locationsList[0];
-      dispatch(fetchWeatherForecast(lat, lon));
-      dispatch(fetchLocationDetails(lat, lon));
+      dispatch(getWeatherForecast(lat, lon));
+      dispatch(getLocationDetails(lat, lon));
     }
 
     if (locationsList && locationsList.length > 1) {
@@ -44,13 +44,13 @@ const SearchContainer = () => {
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    dispatch(fetchLocationsList(encodeURIComponent(searchTerm)));
+    dispatch(getLocationsList(encodeURIComponent(searchTerm)));
   };
 
   const handleDropdownClick = (lat, lon) => {
     setShowDropdown(false);
-    dispatch(fetchWeatherForecast(lat, lon));
-    dispatch(fetchLocationDetails(lat, lon));
+    dispatch(getWeatherForecast(lat, lon));
+    dispatch(getLocationDetails(lat, lon));
   };
 
   const locations = locationsList

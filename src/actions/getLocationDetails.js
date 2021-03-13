@@ -5,23 +5,23 @@ import {
 } from './actionTypes';
 import { fetchLocationDetails } from '../apis/openWeatherMap';
 
-const fetchLocationDetailsStart = () => ({ type: LOCATION_DETAILS_REQUEST });
+const getLocationDetailsRequest = () => ({ type: LOCATION_DETAILS_REQUEST });
 
-const fetchLocationDetailsSuccess = (locationDetails) => ({
+const getLocationDetailsSuccess = (locationDetails) => ({
   type: LOCATION_DETAILS_SUCCESS,
   payload: locationDetails,
 });
 
-const fetchLocationDetailsError = () => ({ type: LOCATION_DETAILS_ERROR });
+const getLocationDetailsError = () => ({ type: LOCATION_DETAILS_ERROR });
 
 const getLocationDetails = (latitude, longitude) => async (dispatch) => {
-  dispatch(fetchLocationDetailsStart());
+  dispatch(getLocationDetailsRequest());
 
   try {
     const locationDetails = await fetchLocationDetails(latitude, longitude);
-    dispatch(fetchLocationDetailsSuccess(locationDetails.data));
+    dispatch(getLocationDetailsSuccess(locationDetails.data));
   } catch (error) {
-    dispatch(fetchLocationDetailsError());
+    dispatch(getLocationDetailsError());
   }
 };
 

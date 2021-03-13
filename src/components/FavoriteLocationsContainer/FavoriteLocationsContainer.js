@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchWeatherForecast, fetchLocationDetails, restoreSavedLocations } from '../../actions';
+import { getWeatherForecast, getLocationDetails, restoreSavedLocations } from '../../actions';
+import formatLocationName from '../../utils/formatLocationName';
 import FavoriteLocations from '../FavoriteLocations';
 
 const FavoriteLocationsContainer = () => {
@@ -28,11 +29,17 @@ const FavoriteLocationsContainer = () => {
   }, [favoriteLocations]);
 
   const handleClick = (latitude, longitude) => {
-    dispatch(fetchWeatherForecast(latitude, longitude));
-    dispatch(fetchLocationDetails(latitude, longitude));
+    dispatch(getWeatherForecast(latitude, longitude));
+    dispatch(getLocationDetails(latitude, longitude));
   };
 
-  const selectedLocationName = locationDetails ? locationDetails[0].locationName : '';
+  const selectedLocationName = locationDetails
+    ? formatLocationName(
+        locationDetails[0].name,
+        locationDetails[0].country,
+        locationDetails[0].state
+      )
+    : '';
 
   const favoriteLocationsList = favoriteLocations.map(({ lat, lon, locationName }) => ({
     lat,
