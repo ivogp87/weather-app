@@ -3,26 +3,25 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from './SearchBarDropdown.module.scss';
 
-const SearchBarDropdown = ({ locationsList, onClick }) => {
-  if (locationsList.length < 2) return null;
-
-  return (
-    <ul className={styles.searchBarDropdown}>
-      {locationsList.map((location) => {
-        const { fullLocationName } = location;
-        return (
-          <li role="presentation" key={fullLocationName} onClick={() => onClick(location)}>
-            <FontAwesomeIcon icon="search" className={styles.icon} />
-            {fullLocationName}
-          </li>
-        );
-      })}
-    </ul>
-  );
-};
+const SearchBarDropdown = ({ locationsList, onClick }) => (
+  <ul className={styles.searchBarDropdown}>
+    {locationsList.map(({ locationName, lat, lon }) => (
+      <li role="presentation" key={locationName} onClick={() => onClick(lat, lon)}>
+        <FontAwesomeIcon icon="search" className={styles.icon} />
+        {locationName}
+      </li>
+    ))}
+  </ul>
+);
 
 SearchBarDropdown.propTypes = {
-  locationsList: PropTypes.arrayOf(PropTypes.object).isRequired,
+  locationsList: PropTypes.arrayOf(
+    PropTypes.shape({
+      locationName: PropTypes.string.isRequired,
+      lat: PropTypes.number.isRequired,
+      lon: PropTypes.number.isRequired,
+    })
+  ).isRequired,
   onClick: PropTypes.func.isRequired,
 };
 
