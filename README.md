@@ -1,5 +1,11 @@
 Weather forecast app built with React
 
+**Demo:**
+
+https://weather.ivo.xyz/
+
+https://ivo.xyz/projects/weather-app
+
 ## Features
 
 - Get current weather conditions and weekly forecast for any location
